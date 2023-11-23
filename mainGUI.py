@@ -11,6 +11,12 @@ caixa = {
         "Banca": 100}
 
 def plot(currJogada, caixa):
+    if currJogada == 1:
+        caixa["Jogador1"] = float(varInputCaixaP1.get())
+        caixa["Jogador2"] = float(varInputCaixaP2.get())
+        caixa["Jogador3"] = float(varInputCaixaP3.get())
+        caixa["Banca"] = float(varInputCaixaBanca.get())
+
     nJogadas = int(varInputEras.get())
 
     strategies = {
@@ -104,7 +110,7 @@ def plot(currJogada, caixa):
 
         plt.clf()
 
-        plt.title(f"Era {currJogada}: ")
+        plt.title(f"Jogada {currJogada}: ")
         plt.xlabel("Jogadores")
         plt.ylabel("Carteira")
         plt.ylim((0, 500))
@@ -119,12 +125,12 @@ def plot(currJogada, caixa):
 
 
         plt.draw()
-        frameInput.after(50, plot, currJogada+1, caixa)
+        frameInput.after(int(varInputTimeIntervalo.get()), plot, currJogada+1, caixa)
     else:
-       caixa["Jogador1"] = 50
-       caixa["Jogador2"] = 50
-       caixa["Jogador3"] = 50
-       caixa["Banca"] = 100
+       caixa["Jogador1"] = float(varInputCaixaP1.get())
+       caixa["Jogador2"] = float(varInputCaixaP2.get())
+       caixa["Jogador3"] = float(varInputCaixaP3.get())
+       caixa["Banca"] = float(varInputCaixaBanca.get())
 
 
 
@@ -161,6 +167,18 @@ varInputCoroa = tk.Entry(master=frameInput)
 varInputCoroa.insert(tk.END,"1.7")
 varInputCoroa.grid(column=1, row=2)
 
+labelTimeIntervalo = tk.Label(text="Intervalo (ms):",master=frameInput)
+labelTimeIntervalo.grid(column=0, row=3)
+varInputTimeIntervalo = tk.Entry(master=frameInput)
+varInputTimeIntervalo.insert(tk.END,"20")
+varInputTimeIntervalo.grid(column=1, row=3)
+
+labelCaixaBanca = tk.Label(text="Carteira Banca:",master=frameInput)
+labelCaixaBanca.grid(column=0, row=4)
+varInputCaixaBanca = tk.Entry(master=frameInput)
+varInputCaixaBanca.insert(tk.END,"100.0")
+varInputCaixaBanca.grid(column=1, row=4)
+
 OPTIONS = [
 "Aleatório",
 "Apenas Cara",
@@ -174,67 +192,85 @@ p3Option = tk.StringVar(root)
 p3Option.set(OPTIONS[0])
 
 labelPlayer1 = tk.Label(text="Jogador 1:",master=frameInput)
-labelPlayer1.grid(column=0, row=3)
+labelPlayer1.grid(column=0, row=5)
 labelPlayer1.config(font=("Courier", 20))
 labelP1Estra = tk.Label(text="Estratégia:",master=frameInput)
-labelP1Estra.grid(column=0, row=4)
+labelP1Estra.grid(column=0, row=6)
 varP1Estra = tk.OptionMenu(frameInput, p1Option, *OPTIONS)
-varP1Estra.grid(column=1, row=4)
+varP1Estra.grid(column=1, row=6)
+
+labelCaixaP1 = tk.Label(text="Carteira:",master=frameInput)
+labelCaixaP1.grid(column=0, row=7)
+varInputCaixaP1 = tk.Entry(master=frameInput)
+varInputCaixaP1.insert(tk.END,"50.0")
+varInputCaixaP1.grid(column=1, row=7)
 
 labelP1Min = tk.Label(text="Jogada Mínima:",master=frameInput)
-labelP1Min.grid(column=0, row=5)
+labelP1Min.grid(column=0, row=8)
 varP1Min = tk.Entry(master=frameInput)
 varP1Min.insert(tk.END,"1.0")
-varP1Min.grid(column=1, row=5)
+varP1Min.grid(column=1, row=8)
 
 labelP1Max = tk.Label(text="Jogada Máxima:",master=frameInput)
-labelP1Max.grid(column=0, row=6)
+labelP1Max.grid(column=0, row=9)
 varP1Max = tk.Entry(master=frameInput)
 varP1Max.insert(tk.END,"5.0")
-varP1Max.grid(column=1, row=6)
+varP1Max.grid(column=1, row=9)
 
 
 
 labelPlayer2 = tk.Label(text="Jogador 2:",master=frameInput)
-labelPlayer2.grid(column=0, row=7)
+labelPlayer2.grid(column=0, row=10)
 labelPlayer2.config(font=("Courier", 20))
 labelP2Estra = tk.Label(text="Estratégia:",master=frameInput)
-labelP2Estra.grid(column=0, row=8)
+labelP2Estra.grid(column=0, row=11)
 varP2Estra = tk.OptionMenu(frameInput, p2Option, *OPTIONS)
-varP2Estra.grid(column=1, row=8)
+varP2Estra.grid(column=1, row=11)
+
+labelCaixaP2 = tk.Label(text="Carteira:",master=frameInput)
+labelCaixaP2.grid(column=0, row=12)
+varInputCaixaP2 = tk.Entry(master=frameInput)
+varInputCaixaP2.insert(tk.END,"50.0")
+varInputCaixaP2.grid(column=1, row=12)
 
 labelP2Min = tk.Label(text="Jogada Mínima:",master=frameInput)
-labelP2Min.grid(column=0, row=9)
+labelP2Min.grid(column=0, row=13)
 varP2Min = tk.Entry(master=frameInput)
 varP2Min.insert(tk.END,"1.0")
-varP2Min.grid(column=1, row=9)
+varP2Min.grid(column=1, row=13)
 
 labelP2Max = tk.Label(text="Jogada Máxima:",master=frameInput)
-labelP2Max.grid(column=0, row=10)
+labelP2Max.grid(column=0, row=14)
 varP2Max = tk.Entry(master=frameInput)
 varP2Max.insert(tk.END,"5.0")
-varP2Max.grid(column=1, row=10)
+varP2Max.grid(column=1, row=14)
 
 
 labelPlayer3 = tk.Label(text="Jogador 3:",master=frameInput)
-labelPlayer3.grid(column=0, row=11)
+labelPlayer3.grid(column=0, row=15)
 labelPlayer3.config(font=("Courier", 20))
 labelP3Estra = tk.Label(text="Estratégia:",master=frameInput)
-labelP3Estra.grid(column=0, row=12)
+labelP3Estra.grid(column=0, row=16)
 varP3Estra = tk.OptionMenu(frameInput, p3Option, *OPTIONS)
-varP3Estra.grid(column=1, row=12)
+varP3Estra.grid(column=1, row=16)
+
+labelCaixaP3 = tk.Label(text="Carteira:",master=frameInput)
+labelCaixaP3.grid(column=0, row=17)
+varInputCaixaP3 = tk.Entry(master=frameInput)
+varInputCaixaP3.insert(tk.END,"50.0")
+varInputCaixaP3.grid(column=1, row=17)
 
 labelP3Min = tk.Label(text="Jogada Mínima:",master=frameInput)
-labelP3Min.grid(column=0, row=13)
+labelP3Min.grid(column=0, row=18)
 varP3Min = tk.Entry(master=frameInput)
 varP3Min.insert(tk.END,"1.0")
-varP3Min.grid(column=1, row=13)
+varP3Min.grid(column=1, row=18)
 
 labelP3Max = tk.Label(text="Jogada Máxima:",master=frameInput)
-labelP3Max.grid(column=0, row=14)
+labelP3Max.grid(column=0, row=19)
 varP3Max = tk.Entry(master=frameInput)
 varP3Max.insert(tk.END,"5.0")
-varP3Max.grid(column=1, row=14)
+varP3Max.grid(column=1, row=19)
 
 
 
