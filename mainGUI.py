@@ -103,22 +103,22 @@ def plot(currJogada, caixa):
         saidaText = "Cara" if saida == 0 else "Coroa"
         aposta1Text = "Cara" if aposta1 == 0 else "Coroa"
         aposta2Text = "Cara" if aposta2 == 0 else "Coroa"
-        aposta2Text = "Cara" if aposta3 == 0 else "Coroa"
+        aposta3Text = "Cara" if aposta3 == 0 else "Coroa"
 
 
 
 
         plt.clf()
 
-        plt.title(f"Jogada {currJogada}: ")
+        plt.title(f"Jogada {currJogada}: {saidaText}")
         plt.xlabel("Jogadores")
         plt.ylabel("Carteira")
         plt.ylim((0, 500))
 
-        keys = (f"Jogador1 ${caixa['Jogador1']:.2f}",
-            f"Jogador2 ${caixa['Jogador2']:.2f}",
-            f"Jogador3 ${caixa['Jogador3']:.2f}",
-            f"Banca ${caixa['Banca']:.2f}")
+        keys = (f"Jogador1: {aposta1Text} \n R${caixa['Jogador1']:.2f}\n ",
+            f"Jogador2: {aposta2Text} \n R${caixa['Jogador2']:.2f} \n ",
+            f"Jogador3: {aposta3Text} \n R${caixa['Jogador3']:.2f} \n ",
+            f"Banca R${caixa['Banca']:.2f}")
         
         values = list(caixa.values())
         plt.bar(keys, values, color ='blue', width = 0.5)
